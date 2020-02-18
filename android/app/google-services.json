@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "491143591771",
+    "firebase_url": "https://timeprogram-80a25.firebaseio.com",
+    "project_id": "timeprogram-80a25",
+    "storage_bucket": "timeprogram-80a25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491143591771:android:64dfe0d67f854b84104c7e",
+        "android_client_info": {
+          "package_name": "com.timem.time_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491143591771-cpthoia34101c9074uh1vr7n1h5fgb91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4_2cnW5wLTrbkYngYeXWWs7WhME85Bgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491143591771-cpthoia34101c9074uh1vr7n1h5fgb91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
