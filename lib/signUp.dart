@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'signUp.dart';
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+import 'login.dart';
+class SignUpPage extends StatefulWidget {
+  SignUpPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
 
   @override
 Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ Widget build(BuildContext context) {
           children: <Widget>[
 
             Text(
-              'Log in:',
+              'Sign up:',
             ),
             TextField(
               obscureText: false,
@@ -38,34 +38,20 @@ Widget build(BuildContext context) {
               ),
             ),
             TextField(
-              obscureText: true,
+              obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Password',
               ),
             ),
-        Container(
-           margin: const EdgeInsets.only(top: 10.0),
-           width: MediaQuery.of(context).size.width,
-           child: FlatButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage(title: "Home Page")),
-                );
-              },
-              child: Text(
-                "Log in",
-                style: TextStyle(fontSize: 20.0),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Confirm Password',
               ),
             ),
-        ),
+
         Container(
             margin: const EdgeInsets.only(top: 10.0),
           width: MediaQuery.of(context).size.width,
@@ -79,7 +65,7 @@ Widget build(BuildContext context) {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SignUpPage(title: "Sign Up Page")),
+                  MaterialPageRoute(builder: (context) => LoginPage(title: "Login Page")),
                 );
               },
               child: Text(
