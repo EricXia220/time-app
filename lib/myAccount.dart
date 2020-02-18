@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class MyAccountPage extends StatefulWidget {
   MyAccountPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -10,37 +11,62 @@ class MyAccountPage extends StatefulWidget {
 class _MyAccountPageState extends State<MyAccountPage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have clicked the button this many times:',
+
+            Container(
+                child: CircleAvatar(
+                    backgroundColor: Colors.grey.shade800,
+                    child: Text('AH',
+                        style:
+                            new TextStyle(fontSize: 30.0, color: Colors.blue)),
+                    radius: 50)),
+            Container(
+              margin: new EdgeInsets.all(15.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+              ),
+              child: Text(
+                'Rank',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              alignment: Alignment(0.0, 0.0),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            Container(
+              margin: new EdgeInsets.all(15.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+              ),
+              child: Text(
+                'Streak',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              alignment: Alignment(0.0, 0.0),
             ),
+            Container(
+              margin: new EdgeInsets.all(15.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+              ),
+              child: Text(
+                'Achievement',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              alignment: Alignment(0.0, 0.0),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Add',
-        child: Icon(Icons.add),
       ),
     );
   }

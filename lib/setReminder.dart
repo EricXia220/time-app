@@ -9,31 +9,50 @@ class SetReminderPage extends StatefulWidget {
 
 class _SetReminderPageState extends State<SetReminderPage> {
 
-
+  String dropdownValue = 'Daily';
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have clicked the button this many times:',
-            ),
+            
+        DropdownButton<String>(
+        value: dropdownValue,
+          icon: Icon(Icons.arrow_downward),
+          iconSize: 24,
+          elevation: 16,
+          style: TextStyle(
+            fontSize: 20,
+              color: Colors.deepPurple,
+          ),
 
+          underline: Container(
+            height: 2,
+            color: Colors.deepPurpleAccent,
+          ),
+          onChanged: (String newValue) {
+            setState(() {
+              dropdownValue = newValue;
+            });
+          },
+          items: <String>['Daily', 'Weekly', 'Monthly']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          })
+              .toList(),
+        )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        //onPressed: _incrementCounter,
-        tooltip: 'Add',
-        child: Icon(Icons.add),
-      ),
+
     );
   }
 }

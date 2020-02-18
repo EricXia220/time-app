@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'myAccount.dart';
+import 'social.dart';
+import 'setReminder.dart';
+import 'displayGoal.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -9,23 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Social',
-      style: optionStyle,
-    ),
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Account',
-      style: optionStyle,
-    ),
+  int _selectedIndex = 1;
+  final List<Widget> _widgetOptions= <Widget>[
+    SocialPage(title: "Social"),
+    DisplayGoalPage(title: "Goal"),
+    MyAccountPage(title: "Account")
   ];
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -36,61 +29,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-            Container(
-              margin: new EdgeInsets.all(20.0),
-              padding: new EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Big Goal',
-              style: TextStyle(fontSize: 50.0),
-              ),
-              alignment: Alignment(0.0, 0.0),
-            ),
-            Container(
-              margin: new EdgeInsets.all(15.0),
-              padding: new EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-              child: Text(
-                'Small Goal',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              alignment: Alignment(0.0, 0.0),
-            ),
-            Container(
-              margin: new EdgeInsets.all(15.0),
-              padding: new EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-              child: Text(
-                'Small Goal',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              alignment: Alignment(0.0, 0.0),
-            ),
-            Container(
-              margin: new EdgeInsets.all(15.0),
-              padding: new EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-              child: Text(
-                'Small Goal',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              alignment: Alignment(0.0, 0.0),
-            ),
-          ])),
+
+      body: Center( child: _widgetOptions.elementAt(_selectedIndex),
+          ),
+
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
