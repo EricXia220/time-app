@@ -23,6 +23,7 @@ class Server {
   }
 
   Future<String> signUp(String email, String password) async {
+    print("called " + email);
     FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return user.uid;
