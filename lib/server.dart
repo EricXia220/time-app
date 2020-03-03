@@ -37,4 +37,22 @@ class Server {
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
   }
+
+  Future<void> addSmallGoal(String title, String difficulty, String frequency, String time) async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    await database.reference().child(user.uid + "/" + "sm" + "/" + "sm1").set({
+      "title": title,
+      "difficulty": difficulty,
+      "frequency": frequency,
+      "time": time,
+    });
+  }
+  
+  Future<void> addBigGoal(String title, String difficulty) async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    await database.reference().child(user.uid + "/" + "bg").set({
+      "title": title,
+      "difficulty": difficulty,
+    });
+  }
 }

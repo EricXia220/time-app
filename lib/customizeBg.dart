@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'setReminder.dart';
+import 'package:time_app/home.dart';
+import 'server.dart';
 
-class customizePage extends StatefulWidget {
-  customizePage({Key key, this.title}) : super(key: key);
+class customizeBgPage extends StatefulWidget {
+  customizeBgPage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _customizePageState createState() => _customizePageState();
+  _customizeBgPageState createState() => _customizeBgPageState();
 }
 
-class _customizePageState extends State<customizePage> {
+class _customizeBgPageState extends State<customizeBgPage> {
   var goalTitleController = TextEditingController();
   var difficultyController = TextEditingController();
+  var server = Server();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,12 +63,19 @@ class _customizePageState extends State<customizePage> {
                 child: OutlineButton(
                     child: new Text("Confirm"),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                SetReminderPage(title: 'Set Reminder', goalTitle: goalTitleController.text.toString(), difficulty: difficultyController.text.toString())),
-                      );
+                      server
+                          .addBigGoal(goalTitleController.text.toString(),
+                              difficultyController.text.toString())
+                          .then((a) {
+                        print("small goal added");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(title: 'Home'),
+                            ));
+                      }).catchError((a) {
+                        print("There is an error");
+                      });
                     },
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)))),

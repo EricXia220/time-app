@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'displayGoal.dart';
 import 'home.dart';
-class SetReminderPage extends StatefulWidget {
-  SetReminderPage({Key key, this.title}) : super(key: key);
-  final String title;
+import 'server.dart';
 
+class SetReminderPage extends StatefulWidget {
+  SetReminderPage({Key key, this.title, this.goalTitle, this.difficulty}) : super(key: key);
+  final String title;
+  String goalTitle;
+  String difficulty;
   @override
   _SetReminderPageState createState() => _SetReminderPageState();
 }
@@ -13,6 +16,8 @@ class SetReminderPage extends StatefulWidget {
 class _SetReminderPageState extends State<SetReminderPage> {
   String dropdownValue = 'Daily';
   String _time = "Not set";
+  var server = Server();
+  var frequencyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,12 +111,19 @@ class _SetReminderPageState extends State<SetReminderPage> {
                 child: OutlineButton(
                     child: new Text("Confirm"),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                HomePage(title: 'Home Page')),
-                      );
+                      server
+                          .addSmallGoal(
+                              widget.goalTitle, widget.difficulty, dropdownValue, _time)
+                          .then((a) {
+                        print("small goal added");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage(title: 'Home Page')),
+                        );
+                      }).catchError((a) {
+                        print("There is an error");
+                      });
                     },
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)))),

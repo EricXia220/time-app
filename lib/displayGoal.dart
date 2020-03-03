@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'addGoal.dart';
+import 'customizeBg.dart';
+
 class DisplayGoalPage extends StatefulWidget {
   DisplayGoalPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -9,67 +11,72 @@ class DisplayGoalPage extends StatefulWidget {
 }
 
 class _DisplayGoalPageState extends State<DisplayGoalPage> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  margin: new EdgeInsets.all(20.0),
-                  padding: new EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                  ),
-                  child: Text('Big Goal',
-                    style: TextStyle(fontSize: 50.0),
-                  ),
-                  alignment: Alignment(0.0, 0.0),
-                ),
-                Container(
-                  margin: new EdgeInsets.all(15.0),
-                  padding: new EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                  ),
+            Container(
+              margin: new EdgeInsets.all(20.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: FlatButton(
+                  color: Colors.transparent,
+                  textColor: Colors.black,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => customizeBgPage(title: 'Add big goal'),
+                        ));
+                  },
                   child: Text(
-                    'Small Goal',
-                    style: TextStyle(fontSize: 30.0),
-                  ),
-                  alignment: Alignment(0.0, 0.0),
-                ),
-                Container(
-                  margin: new EdgeInsets.all(15.0),
-                  padding: new EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                  ),
-                  child: Text(
-                    'Small Goal',
-                    style: TextStyle(fontSize: 30.0),
-                  ),
-                  alignment: Alignment(0.0, 0.0),
-                ),
-                Container(
-                  margin: new EdgeInsets.all(15.0),
-                  padding: new EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                  ),
-                  child: Text(
-                    'Small Goal',
-                    style: TextStyle(fontSize: 30.0),
-                  ),
-                  alignment: Alignment(0.0, 0.0),
-                ),
-              ])
-      ),
-
+                    "Big Goal",
+                    style: TextStyle(fontSize: 40.0),
+                  )),
+              alignment: Alignment(0.0, 0.0),
+            ),
+            Container(
+              margin: new EdgeInsets.all(15.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Text(
+                'Small Goal',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              alignment: Alignment(0.0, 0.0),
+            ),
+            Container(
+              margin: new EdgeInsets.all(15.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Text(
+                'Small Goal',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              alignment: Alignment(0.0, 0.0),
+            ),
+            Container(
+              margin: new EdgeInsets.all(15.0),
+              padding: new EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Text(
+                'Small Goal',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              alignment: Alignment(0.0, 0.0),
+            ),
+          ])),
       floatingActionButton: FloatingActionButton(
         //onPressed: _incrementCounter,
         elevation: 0.0,
@@ -78,7 +85,8 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => addGoalPage(title: 'Add Goals')),
+            MaterialPageRoute(
+                builder: (context) => addGoalPage(title: 'Add Goals')),
           );
         },
       ),

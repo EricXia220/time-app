@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'signUp.dart';
 import 'server.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -20,6 +21,7 @@ Widget build(BuildContext context) {
     return Scaffold(
 
       body: Center(
+
         child: Container(
           decoration: BoxDecoration(
             gradient: new LinearGradient(
@@ -84,7 +86,7 @@ Widget build(BuildContext context) {
              },
               child: Text(
                 "Log in",
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontFamily: 'Raleway', fontSize: 20.0),
               ),
             ),
         ),
