@@ -87,13 +87,15 @@ class _SignUpPageState extends State<SignUpPage> {
                                     LoginPage(title: "Login Page")),
                           );
                           print('successfully signed up');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginPage(title: "Login Page")),
+                          );
                         }).catchError((e) {
                           print('fail to sign up an account' + e.toString());
                         });
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => LoginPage(title: "Login Page")),
-//                );
                       },
                       child: Text(
                         "Sign up",
