@@ -14,6 +14,8 @@ class displayBgPage extends StatefulWidget {
 
 class _displayBgPageState extends State<displayBgPage> {
   var server = Server();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,7 @@ class _displayBgPageState extends State<displayBgPage> {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(30.0))),
             OutlineButton(
+
                 child: new Text("Complete"),
                 onPressed: () {
                   server.completeBg().then((d) {

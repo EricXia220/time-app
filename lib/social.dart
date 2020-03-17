@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'server.dart';
 class SocialPage extends StatefulWidget {
   SocialPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -9,14 +9,22 @@ class SocialPage extends StatefulWidget {
 }
 
 class _SocialPageState extends State<SocialPage> {
-  int _counter = 0;
+  var server = Server();
+  List <dynamic> users = new List();
+  _SocialPageState() {
+    server.getUsers().then((ds) {
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+      ds.value.forEach((k, v) {
+        print(k);
+        print(v["points"]);
+        setState(() {
+          users.add(v);
+        });
+      });
+    }).catchError((e) {
+      print("Failed to get users.");
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

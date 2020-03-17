@@ -45,7 +45,7 @@ class _displaySmPageState extends State<displaySmPage> {
             ),
             OutlineButton(
                 child: new Text("Complete"),
-                onPressed: () {
+                onPressed: () { setState(() {
                   server.completeSm(widget.goal["id"]);
                   Navigator.push(
                       context,
@@ -53,6 +53,8 @@ class _displaySmPageState extends State<displaySmPage> {
                         builder: (context) =>
                             HomePage(title: 'Home'),
                       ));
+                });
+
                 },
                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
             ),

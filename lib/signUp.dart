@@ -12,6 +12,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  var usernameEditingController = TextEditingController();
   var emailTextEditingController = TextEditingController();
   var passwordTextEditingController = TextEditingController();
   var password2TextEditingController = TextEditingController();
@@ -39,6 +40,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   'Sign up:',
                 ),
                 TextField(
+                  controller: usernameEditingController,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Username',
+                  ),
+                ),
+                TextField(
                   controller: emailTextEditingController,
                   obscureText: false,
                   decoration: InputDecoration(
@@ -48,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextField(
                   controller: passwordTextEditingController,
-                  obscureText: false,
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
@@ -77,9 +86,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         print(passwordTextEditingController.text.toString());
                         print(password2TextEditingController.text.toString());
                         server
-                            .signUp(emailTextEditingController.text.toString(),
-                                passwordTextEditingController.text.toString())
+                            .signUpWithProfile(emailTextEditingController.text.toString(),
+                                passwordTextEditingController.text.toString(), usernameEditingController.text.toString())
                             .then((uid) {
+                              server.addBigGoal("New Big Goal", "-");
                           Navigator.push(
                             context,
                             MaterialPageRoute(
