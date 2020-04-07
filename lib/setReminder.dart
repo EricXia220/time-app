@@ -119,7 +119,7 @@ class _SetReminderPageState extends State<SetReminderPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomePage(title: 'Home Page')),
+                              builder: (context) => HomePage(title: 'Home Page', selectedIndex: 1,)),
                         );
                       }).catchError((a) {
                         print("There is an error");

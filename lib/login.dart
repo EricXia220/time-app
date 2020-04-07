@@ -77,7 +77,7 @@ Widget build(BuildContext context) {
                    context,
                    MaterialPageRoute(
                        builder: (context) =>
-                           HomePage(title: "Home Page")),
+                           HomePage(title: "Home Page", selectedIndex: 1,)),
                  );
                  print('successfully signed in');
                }).catchError((e) {

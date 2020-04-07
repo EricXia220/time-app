@@ -51,7 +51,7 @@ class _displayBgPageState extends State<displayBgPage> {
                         MaterialPageRoute(
                           builder: (context) =>
                               customizeBgPage(title: 'customize your new big goal'),
-                        ));
+                        )); server.setRank();
                   }).catchError((e) {
                     print('Failed to complete ' + e.toString());
                   });

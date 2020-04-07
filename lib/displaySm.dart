@@ -14,6 +14,32 @@ class displaySmPage extends StatefulWidget {
 
 class _displaySmPageState extends State<displaySmPage> {
   var server = Server();
+  var newTime = new DateTime.fromMillisecondsSinceEpoch(new DateTime.now().millisecondsSinceEpoch);
+  Function completeButtonAction() {
+    var lastTime = new DateTime.fromMillisecondsSinceEpoch(widget.goal['lastCompletionTime']);
+    if (lastTime.day == newTime.day)
+      {print("Already completed");
+      print(newTime.day);
+      print(lastTime.day);
+      } else {
+      print("Complete");
+
+        setState(() {
+          server.completeSm(widget.goal["id"]);
+          server.setLastCompletionTime(widget.goal["id"]);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(title: 'Home', selectedIndex: 1,),
+              ));
+          server.setRank(); server.addStreak();
+        });
+      print(newTime.day);
+      print(lastTime.day);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,17 +71,7 @@ class _displaySmPageState extends State<displaySmPage> {
             ),
             OutlineButton(
                 child: new Text("Complete"),
-                onPressed: () { setState(() {
-                  server.completeSm(widget.goal["id"]);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(title: 'Home'),
-                      ));
-                });
-
-                },
+                onPressed: completeButtonAction,
                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
             ),
             OutlineButton(
@@ -66,7 +82,7 @@ class _displaySmPageState extends State<displaySmPage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              HomePage(title: 'Home'),
+                              HomePage(title: 'Home', selectedIndex: 1,),
                         ));
                   }).catchError(
                           (e) {

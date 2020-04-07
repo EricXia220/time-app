@@ -6,8 +6,9 @@ import 'displayGoal.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'server.dart';
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key, this.title, this.selectedIndex}) : super(key: key);
   final String title;
+  var selectedIndex;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -15,7 +16,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
-    int _selectedIndex = 1;
     final List<Widget> _widgetOptions= <Widget>[
       SocialPage(title: "Social"),
       DisplayGoalPage(title: "Goal"),
@@ -23,33 +23,36 @@ class _HomePageState extends State<HomePage> {
     ];
     void _onItemTapped(int index) {
       setState(() {
-        _selectedIndex = index;
+        widget.selectedIndex = index;
       });
     }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center( child: _widgetOptions.elementAt(_selectedIndex),
+      body: Center( child: _widgetOptions.elementAt(widget.selectedIndex),
           ),
-
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF0B0157),
+        type: BottomNavigationBarType.fixed,
+
+        unselectedItemColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.group),
             title: Text('Social'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Home'),
+            icon: Icon(Icons.event_available),
+            title: Text('Goal'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.account_circle),
             title: Text('Account'),
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        currentIndex: widget.selectedIndex,
+        selectedItemColor: Color(0xFF51F7ED),
         onTap: _onItemTapped,
       ),
     );

@@ -71,7 +71,7 @@ class _customizeBgPageState extends State<customizeBgPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomePage(title: 'Home'),
+                              builder: (context) => HomePage(title: 'Home', selectedIndex: 1,),
                             ));
                       }).catchError((a) {
                         print("There is an error");

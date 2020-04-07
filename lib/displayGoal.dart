@@ -5,6 +5,7 @@ import 'addGoal.dart';
 import 'customizeBg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'displayBg.dart';
+
 class DisplayGoalPage extends StatefulWidget {
   DisplayGoalPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -45,66 +46,111 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
       });
     }).catchError((e) {
       print("Failed to get the big goals.");
-    });}
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(
+            bottom: 80,
+          ),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-            Container(
-              margin: new EdgeInsets.only(top: 40.0, bottom: 20.0, left: 20.0, right: 20.0),
-              padding: new EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: FlatButton(
-                  color: Colors.transparent,
-                  textColor: Colors.black,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              displayBgPage(title: 'big goal', goal: bigGoal,),
-                        ));
-                  },
-                  child: Text(
-                    bigGoalString.toString(),
-                    style: TextStyle(fontSize: 40.0),
-                  )),
-              alignment: Alignment(0.0, 0.0),
-            ),
-            Container(
-
-                child: Expanded(
+                Container(
+                    padding: EdgeInsets.only(
+                      bottom: 10,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Color(0xFF0B0157),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40),
+                        )),
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: 50, bottom: 30, left: 30, right: 30),
+                      width: MediaQuery.of(context).size.width,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF31FF87), Color(0xFF51F7ED)],
+                        ),
+                      ),
+                      child: FlatButton(
+                          color: Colors.transparent,
+                          textColor: Colors.black,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => displayBgPage(
+                                    title: 'big goal',
+                                    goal: bigGoal,
+                                  ),
+                                ));
+                          },
+                          child: Text(
+                            bigGoalString.toString(),
+                            style: TextStyle(fontSize: 40.0),
+                          )),
+                    )),
+                Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 30,
+                    ),
+                    alignment: Alignment.topLeft,
+                    child: Text("Small Goals",
+                        style: TextStyle(
+                          fontSize: 22,
+                        ))),
+                Container(
+                  child: Expanded(
                     child: ListView.builder(
                         padding: const EdgeInsets.all(8),
                         itemCount: entries.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => displaySmPage(title: 'Goals', goal: entries[index])),
-                              );
-                            },
-                            title: Container(
-                              padding: new EdgeInsets.all(10.0),
-                              margin: new EdgeInsets.all(10.0),
-                              height: 50,
-                              color: Colors.green,
-                              child: Center(child: Text('${entries[index]["title"]}')),
-                            ),
-                          );
-                        })))
-          ])),
+                          return Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: ListTile(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 5),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => displaySmPage(
+                                            title: 'Goals',
+                                            goal: entries[index])),
+                                  );
+                                },
+                                title: Container(
+                                  alignment: Alignment.topLeft,
+                                  padding: new EdgeInsets.all(10.0),
+                                  margin: new EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                  ),
+                                  height: 50,
+                                  color: Colors.white,
+                                  child: Center(
+                                      child:
+                                          Text('${entries[index]["title"]}')),
+                                ),
+                              ));
+                        }),
+                  ),
+                ),
+              ])),
       floatingActionButton: FloatingActionButton(
-        //onPressed: _incrementCounter,
-        elevation: 0.0,
+        backgroundColor: Color(0xFF0B0157),
+        elevation: 5.0,
         tooltip: 'Add',
         child: Icon(Icons.add),
         onPressed: () {
