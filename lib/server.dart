@@ -320,7 +320,7 @@ class Server {
         .once();
     return ds;
   }
-  Future<void> updateStreak() async {
-    FirebaseUser user = 
-  }
+//  Future<void> updateStreak() async {
+//    FirebaseUser user =
+//  }
 }
