@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:time_app/displaySm.dart';
 import 'package:time_app/server.dart';
@@ -47,12 +49,21 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
     }).catchError((e) {
       print("Failed to get the big goals.");
     });
+
+      server.updateStreak().then((ds3) {
+        print("streak updated");
+      }).catchError((e) {
+        print("failed to add streak");
+      });
+
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(
             bottom: 80,
@@ -65,20 +76,20 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                       bottom: 10,
                     ),
                     decoration: BoxDecoration(
-                        color: Color(0xFF0B0157),
+                       gradient: LinearGradient(begin: Alignment.topLeft, colors: [Color(0xFF469CAD), Color(0xFF469CAD)]),
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(40),
                           bottomRight: Radius.circular(40),
                         )),
                     child: Container(
                       margin: EdgeInsets.only(
-                          top: 50, bottom: 30, left: 30, right: 30),
+                          top: 40, bottom: 30, left: 40, right: 40),
                       width: MediaQuery.of(context).size.width,
                       height: 150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         gradient: LinearGradient(
-                          colors: [Color(0xFF31FF87), Color(0xFF51F7ED)],
+                          colors: [Color(0xFF8AC1CF), Colors.white, ],
                         ),
                       ),
                       child: FlatButton(
@@ -96,7 +107,7 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                           },
                           child: Text(
                             bigGoalString.toString(),
-                            style: TextStyle(fontSize: 40.0),
+                            style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.normal, color: Colors.black87,),
                           )),
                     )),
                 Container(
@@ -110,6 +121,7 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                           fontSize: 22,
                         ))),
                 Container(
+
                   child: Expanded(
                     child: ListView.builder(
                         padding: const EdgeInsets.all(8),
@@ -149,7 +161,7 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                 ),
               ])),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF0B0157),
+        backgroundColor: Color(0xFF469CAD),
         elevation: 5.0,
         tooltip: 'Add',
         child: Icon(Icons.add),

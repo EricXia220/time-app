@@ -45,7 +45,9 @@ class _SocialPageState extends State<SocialPage> {
             Container(
               padding: new EdgeInsets.only(bottom: 10.0),
               decoration: BoxDecoration(
-                color: Color(0xFF0B0157),
+                gradient: LinearGradient(
+                  colors: [Color(0xFF469CAD), Color(0xFF469CAD)]
+                ),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20),

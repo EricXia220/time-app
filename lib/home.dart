@@ -5,6 +5,8 @@ import 'setReminder.dart';
 import 'displayGoal.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'server.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:gradient_bottom_navigation_bar/gradient_bottom_navigation_bar.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title, this.selectedIndex}) : super(key: key);
   final String title;
@@ -33,10 +35,11 @@ class _HomePageState extends State<HomePage> {
       body: Center( child: _widgetOptions.elementAt(widget.selectedIndex),
           ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF0B0157),
+
+        backgroundColor: Color(0xFF469CAD),
         type: BottomNavigationBarType.fixed,
 
-        unselectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white60,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.group),
@@ -52,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: widget.selectedIndex,
-        selectedItemColor: Color(0xFF51F7ED),
+        selectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
     );

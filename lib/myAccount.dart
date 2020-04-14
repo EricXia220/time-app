@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:time_app/login.dart';
 import 'server.dart';
-
+import 'package:image_picker/image_picker.dart';
 class MyAccountPage extends StatefulWidget {
   MyAccountPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -11,6 +13,15 @@ class MyAccountPage extends StatefulWidget {
 
 class _MyAccountPageState extends State<MyAccountPage> {
   var server = Server();
+    File _image;
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    print("Get image");
+    setState(() {
+      _image = image;
+      print(image); print(image.path);
+    });
+  }
   var userName;
   var rank;
   var streak;
@@ -51,7 +62,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
           children: <Widget>[
             Container(
                 decoration: BoxDecoration(
-              color: Color(0xFF0B0157),
+              color: Color(0xFF469CAD),
             )),
             Column(children: <Widget>[
               Padding(
@@ -67,8 +78,12 @@ class _MyAccountPageState extends State<MyAccountPage> {
                           border: Border.all(color: Colors.white, width: 2.0),
                         ),
                         padding: EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
+                        child: InkWell(
+                          onTap: getImage,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(_image == null ? 'assets/camera.png' : _image.path),
+    backgroundColor: Colors.grey,
+                          ),
                         ),
                       ),
                     ]),
@@ -124,12 +139,29 @@ class _MyAccountPageState extends State<MyAccountPage> {
                           onChanged: (_) {},
                         ),
                       ),
+                      ListTile(
+                        title:          Container(
+                          margin: EdgeInsets.symmetric(horizontal: 120),
+                          child: OutlineButton(
+                            
+                            child: new Text("Sign Out"),
+                            onPressed: () {
+                              server.signOut();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        LoginPage(title: 'Login'),
+                                  ));
+                              BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                              );
+                            }),
+                      )),
                     ] ).toList(),
 
-
-              )
+              ),
             ),
-
           ],
         ),
       ),

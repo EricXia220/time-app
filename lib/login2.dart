@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'displayGoal.dart';
 import 'home.dart';
+import 'signUp.dart';
 import 'server.dart';
 
-class SetReminderPage extends StatefulWidget {
-  SetReminderPage({Key key, this.title, this.goalTitle, this.difficulty}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key key, this.title}) : super(key: key);
   final String title;
-  String goalTitle;
-  String difficulty;
+
   @override
-  _SetReminderPageState createState() => _SetReminderPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _SetReminderPageState extends State<SetReminderPage> {
-  String dropdownValue = 'Daily';
-  String _time = "Not set";
+class _LoginPageState extends State<LoginPage> {
+  var usernameEditingController = TextEditingController();
+  var emailTextEditingController = TextEditingController();
+  var passwordTextEditingController = TextEditingController();
+  var password2TextEditingController = TextEditingController();
+
   var server = Server();
-  var frequencyController = TextEditingController();
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF469CAD),
@@ -44,7 +43,7 @@ class _SetReminderPageState extends State<SetReminderPage> {
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
               children: <Widget>[
-                Text('Set Reminder',
+                Text('Add Your Goal',
                     style: TextStyle(color: Colors.white, fontSize: 25.0)),
               ],
             ),
@@ -55,13 +54,12 @@ class _SetReminderPageState extends State<SetReminderPage> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50.0),
-                  topRight: Radius.circular(50)),
+                  topLeft: Radius.circular(75.0),
+                  topRight: Radius.circular(75)),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 50,),
                 RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)),
@@ -118,7 +116,6 @@ class _SetReminderPageState extends State<SetReminderPage> {
                   ),
                   color: Colors.white,
                 ),
-                SizedBox(height: 20,),
                 DropdownButton<String>(
                   value: dropdownValue,
                   icon: Icon(Icons.arrow_downward),
@@ -126,11 +123,11 @@ class _SetReminderPageState extends State<SetReminderPage> {
                   elevation: 16,
                   style: TextStyle(
                     fontSize: 20,
-                    color: Color(0xFF469CAD),
+                    color: Colors.deepPurple,
                   ),
                   underline: Container(
                     height: 2,
-                    color: Color(0xFF469CAD),
+                    color: Colors.deepPurpleAccent,
                   ),
                   onChanged: (String newValue) {
                     setState(() {
@@ -145,7 +142,6 @@ class _SetReminderPageState extends State<SetReminderPage> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 20,),
                 Container(
                     child: OutlineButton(
                         child: new Text("Confirm"),
@@ -174,4 +170,3 @@ class _SetReminderPageState extends State<SetReminderPage> {
     );
   }
 }
-

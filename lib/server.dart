@@ -160,9 +160,9 @@ class Server {
     if (ds2.value != null) {
       points = ds2.value;
     }
-    if (difficulty == "easy") {
+    if (difficulty == "Easy") {
       points += 10;
-    } else if (difficulty == "medium") {
+    } else if (difficulty == "Medium") {
       points += 15;
     } else {
       points += 20;
@@ -193,11 +193,11 @@ class Server {
     if (ds2.value != null) {
       points = ds2.value;
     }
-    if (difficulty == "easy") {
+    if (difficulty == "Easy") {
       points += 150;
-    } else if (difficulty == "medium") {
+    } else if (difficulty == "Medium") {
       points += 200;
-    } else if (difficulty == "hard"){
+    } else if (difficulty == "Hard"){
       points += 250;
     }
     await database.reference().child(user.uid + "/achievements" + "/a" + id + "/title").set(ds3.value);
@@ -320,7 +320,33 @@ class Server {
         .once();
     return ds;
   }
-//  Future<void> updateStreak() async {
-//    FirebaseUser user =
-//  }
+  Future<void> updateStreak() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    DataSnapshot ds = await database.reference()
+        .child(user.uid + "/" + "sm")
+        .once();
+    var reset = false;
+    var date = new DateTime.fromMillisecondsSinceEpoch(new DateTime.now().millisecondsSinceEpoch);
+    ds.value.forEach((k, v) {
+      print(v);
+      print(v['title']);
+      var date2 = new DateTime.fromMillisecondsSinceEpoch(v['lastCompletionTime']);
+      var id = v["id"];
+      if (date.day - date2.day > 1) {
+        database
+            .reference()
+            .child(user.uid + "/" + "sm" + "/" + "sm-" + id + "/" + "streak")
+            .set(0);
+        reset = true;
+      }
+      print(date2.day);
+      print(date.day);
+    });
+    if (reset){
+      database
+          .reference()
+          .child(user.uid + "/streak")
+          .set(0);
+    }
+  }
 }
