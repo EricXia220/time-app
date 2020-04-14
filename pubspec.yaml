@@ -28,6 +28,8 @@ dependencies:
   flutter_launcher_icons: ^0.7.4
   gradient_app_bar: ^0.0.1
   gradient_bottom_navigation_bar: ^1.0.0+4
+  flutter_local_notifications: ^1.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

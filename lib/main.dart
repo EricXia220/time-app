@@ -3,8 +3,28 @@ import 'package:time_app/login.dart';
 import 'nextDart.dart';
 import 'login.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
 // main method
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  var initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
+  var initializationSettingsIOS = IOSInitializationSettings();
+  var initializationSettings = InitializationSettings(
+      initializationSettingsAndroid, initializationSettingsIOS);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String payload) async {
+        if (payload != null) {
+          debugPrint('notification payload: ' + payload);
+        }
+        print("Initialized " + payload);
+      });
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
