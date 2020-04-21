@@ -79,9 +79,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
                         ),
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: getImage,
+
                           child: CircleAvatar(
-                            backgroundImage: AssetImage(_image == null ? 'assets/camera.png' : _image.path),
+                            backgroundImage: AssetImage(_image == null ? 'assets/background4.jpg' : _image.path),
     backgroundColor: Colors.grey,
                           ),
                         ),

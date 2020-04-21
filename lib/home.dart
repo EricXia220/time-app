@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   _HomePageState() {
-    _init_notifications();
+
   }
 
   final List<Widget> _widgetOptions = <Widget>[

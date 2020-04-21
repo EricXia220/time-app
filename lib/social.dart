@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_app/displayUser.dart';
 import 'server.dart';
-
+import 'localdb3.dart';
 class SocialPage extends StatefulWidget {
   SocialPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -13,7 +13,7 @@ class SocialPage extends StatefulWidget {
 class _SocialPageState extends State<SocialPage> {
   var server = Server();
   List<dynamic> users = new List();
-
+  List<Color> colors = [Color(0xFF89593D), Color(0xFF90A5AA), Color(0xFFC3A25C), Color(0xFF4E7370), Color(0xFF828BC1), Color(0xFF7B2683)];
   _SocialPageState() {
     server.getUsers().then((ds) {
       ds.value.forEach((k, v) {
@@ -89,9 +89,7 @@ class _SocialPageState extends State<SocialPage> {
                               '${users[index]["name"]}',
                               style: TextStyle(fontSize: 30.0),
                             ),
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.grey
-                            ),
+                            leading: ImageIcon(AssetImage('${LocalDB3.defaultGoals[users[index]["rankBadge"] - 1]['image']}'), color: colors[users[index]["rankColor"] - 1], size: 40),
                             trailing: Text('${users[index]["rank"]}'),
                             subtitle: Text("Streak: " + '${users[index]["streak"]}'),
                           );

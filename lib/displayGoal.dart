@@ -7,7 +7,8 @@ import 'addGoal.dart';
 import 'customizeBg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'displayBg.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'main.dart';
 class DisplayGoalPage extends StatefulWidget {
   DisplayGoalPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -17,17 +18,22 @@ class DisplayGoalPage extends StatefulWidget {
 
 class _DisplayGoalPageState extends State<DisplayGoalPage> {
   var server = Server();
+  var color = Color(0xFF469CAD);
   List<dynamic> entries = new List();
   var bigGoalString;
   var bigGoal;
+  var background = 'assets/background4.jpg';
   _DisplayGoalPageState() {
+    _showDailyAtTime();
     server.getSmallGoals().then((ds) {
       print(ds.key);
       print(ds.value);
       ds.value.forEach((k, v) {
         print(v);
         print(v['title']);
+
         setState(() {
+
           entries.add(v);
         });
       });
@@ -58,12 +64,62 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
 
 
   }
+  void _init_notifications() {
+    print("Initializing the periodic notification");
+    // Show a notification every minute with the first appearance happening a minute after invoking the method
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'repeating channel id',
+        'repeating channel name',
+        'repeating description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    flutterLocalNotificationsPlugin.periodicallyShow(
+        0,
+        'Goal Reminder',
+        'Check Your Goal',
+        RepeatInterval.EveryMinute,
+        platformChannelSpecifics);
+  }
+  Future<void> _showDailyAtTime() async {
+    var time = Time(10, 0, 0);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'repeatDailyAtTime channel id',
+        'repeatDailyAtTime channel name',
+        'repeatDailyAtTime description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+        0,
+        'Goal Reminder',
+        'Make Sure to Complete Your Goals', time,
+        platformChannelSpecifics);
+  }
+
+  Future<void> _showWeeklyAtTime(String title, int hour, int minute) async {
+    var time = Time(hour, minute);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'repeatDailyAtTime channel id',
+        'repeatDailyAtTime channel name',
+        'repeatDailyAtTime description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.showWeeklyAtDayAndTime(
+        0,
+        'Goal Reminder',
+        title, Day.Monday, time,
+        platformChannelSpecifics);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
+          decoration: BoxDecoration(
+          ),
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(
             bottom: 80,
@@ -72,6 +128,7 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
+
                     padding: EdgeInsets.only(
                       bottom: 10,
                     ),
@@ -82,19 +139,22 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                           bottomRight: Radius.circular(40),
                         )),
                     child: Container(
+
                       margin: EdgeInsets.only(
                           top: 40, bottom: 30, left: 40, right: 40),
                       width: MediaQuery.of(context).size.width,
                       height: 150,
                       decoration: BoxDecoration(
+                          image:
+                          DecorationImage(image: AssetImage(background), fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(16),
                         gradient: LinearGradient(
-                          colors: [Color(0xFF8AC1CF), Colors.white, ],
+                          colors: [Color(0xFF469CAD), Color(0xFF469CAD), ],
                         ),
                       ),
                       child: FlatButton(
                           color: Colors.transparent,
-                          textColor: Colors.black,
+                          textColor: Colors.white,
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -107,7 +167,7 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                           },
                           child: Text(
                             bigGoalString.toString(),
-                            style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.normal, color: Colors.black87,),
+                            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.normal, color: Colors.white,),
                           )),
                     )),
                 Container(
@@ -153,7 +213,7 @@ class _DisplayGoalPageState extends State<DisplayGoalPage> {
                                   color: Colors.white,
                                   child: Center(
                                       child:
-                                          Text('${entries[index]["title"]}')),
+                                          Text('${entries[index]["title"]}', style: TextStyle(fontSize: 20),), ),
                                 ),
                               ));
                         }),

@@ -55,10 +55,15 @@ class _customizePageState extends State<customizePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                Container(
+                  child: Text("My Goal Is: ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),),
+                  alignment: Alignment.topLeft,
+                  margin: EdgeInsets.only(left: 20, top: 70),
+                ),
                   Container(
                       padding: EdgeInsets.all(10),
                       alignment: Alignment.topCenter,
-                      margin: EdgeInsets.only(top: 80, left: 10, right: 10),
+                      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                       decoration: BoxDecoration(
                           border: Border(bottom: BorderSide(
                               color: Colors.grey[200]))
@@ -71,36 +76,47 @@ class _customizePageState extends State<customizePage> {
                             labelText: 'Name',
                           ))),
 
-                Container(
-                  child: DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: Icon(Icons.arrow_downward),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Color(0xFF469CAD),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Text("Difficulty: ", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),),
+                      margin: EdgeInsets.only(left: 20, top: 20),
                     ),
-                    underline: Container(
-                      height: 2,
-                      color: Color(0xFF469CAD),
+                    Container(
+                      margin: EdgeInsets.only(left: 50, top: 20),
+                      child: DropdownButton<String>(
+                        value: dropdownValue,
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF469CAD),
+                        ),
+                        underline: Container(
+                          height: 2,
+                          color: Color(0xFF469CAD),
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: <String>['Easy', 'Medium', 'Hard']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
                     ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['Easy', 'Medium', 'Hard']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
+                  ],
                 ),
 
                 Container(
+                  margin: EdgeInsets.only(top: 30),
                     child: OutlineButton(
                         child: new Text("Confirm"),
                         onPressed: () {

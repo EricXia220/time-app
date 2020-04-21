@@ -17,49 +17,108 @@ class _displayUserPageState extends State<displayUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                child: Text(
-             "Rank: " + '${widget.user["rank"]}',
-            )),
-            Container(
-                child: Text(
-                  "Points: " + '${widget.user["points"]}',
-                )),
-            Container(
-              child: Text(
-                "Last Achievement: " + '${widget.user["lastAchievement"]}'
-              )
+      body: Container(
+          decoration: BoxDecoration(
+              image:
+              DecorationImage(image: AssetImage('assets/background5.jpg'), fit: BoxFit.cover)),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Colors.black.withOpacity(.3),
+                Colors.black.withOpacity(.3),
+              ]),
             ),
+            child: Padding(
+              padding: EdgeInsets.all(40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        )),
+                  ),
+                  Text(
+                    '${widget.user["name"]}',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Rank",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                      Text(
+                        '${widget.user["rank"]}',
+                        style: TextStyle(
+                            color: Colors.yellow[400],
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Points",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                      Text(
+                        '${widget.user["points"]}',
+                        style: TextStyle(
+                            color: Colors.yellow[400],
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Last Achievement",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                      Text(
+                        '${widget.user["lastAchievement"]}',
+                        style: TextStyle(
+                            color: Colors.yellow[400],
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
 
-            OutlineButton(
-                child: new Text("Back"),
-                onPressed: () { setState(() {
+                  )
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(title: 'Home', selectedIndex: 0,),
-                      ));
-                });
 
-                },
-                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
+                ],
+              ),
             ),
-
-
-
-          ],
-        ),
-      ),
-
+          )),
     );
   }
 }

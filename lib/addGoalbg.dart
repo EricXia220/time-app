@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:time_app/localdb2.dart';
 import 'customize.dart';
 import 'localdb.dart';
 import 'setReminder.dart';
+import 'server.dart';
+import 'home.dart';
+import 'customizeBg.dart';
 import 'dart:math';
-class addGoalPage extends StatefulWidget {
-  addGoalPage({Key key, this.title}) : super(key: key);
+class addGoalbgPage extends StatefulWidget {
+  addGoalbgPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _addGoalPageState createState() => _addGoalPageState();
+  _addGoalbgPageState createState() => _addGoalbgPageState();
 }
 
-class _addGoalPageState extends State<addGoalPage> {
+class _addGoalbgPageState extends State<addGoalbgPage> {
 //  final List<String> entries = <String>['A', 'B', 'C'];
 //  final List<dynamic> entries = <String>['A', 'B', 'C'];
   final List<int> colorCodes = <int>[600, 500, 100];
-List<Color> colors = [Color(0xFF89A998), Color(0xFFACD3AE), Color(0xFF469CAD), Color(0xFF9CCAD5), Color(0xFFB1D4C4)];
-Random random = new Random();
+  List<Color> colors = [Color(0xFF89A998), Color(0xFFACD3AE), Color(0xFF469CAD), Color(0xFF9CCAD5), Color(0xFFB1D4C4)];
+  Random random = new Random();
+  var server = Server();
+  var goalTitleController = TextEditingController();
+  var difficultyController = TextEditingController();
+  String dropdownValue = "Medium";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF469CAD),
-
       body: ListView(
         children: <Widget>[
           Padding(
@@ -61,7 +68,7 @@ Random random = new Random();
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
               children: <Widget>[
-                Text('Add Your Goal',
+                Text('Choose Your Big Goal',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 25.0)),
@@ -82,7 +89,7 @@ Random random = new Random();
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              customizePage(title: 'Customize')),
+                              customizeBgPage(title: 'Customize')),
                     );
                   },
                   shape: new RoundedRectangleBorder(
@@ -96,38 +103,34 @@ Random random = new Random();
               ),
               child: ListView.separated(
                 padding: const EdgeInsets.all(8),
-                itemCount: LocalDB.defaultGoals.length,
+                itemCount: LocalDB2.defaultGoals.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var colorIndex = random.nextInt(5);
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: colors[colorIndex],
-
+                      color: colors[random.nextInt(5)],
                     ),
                     child: ListTile(
-
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SetReminderPage(
-                                title: 'Set Reminder',
-                                goalTitle: LocalDB.defaultGoals[index]['name'],
-                                difficulty: LocalDB.defaultGoals[index]
-                                    ['difficulty'],
-                              ),
-                            ));
-                        print("choose " + LocalDB.defaultGoals[index].toString()); print('${LocalDB.defaultGoals[index]['image']}');
+                        server
+                            .addBigGoal('${LocalDB2.defaultGoals[index]['name']}',
+                            '${LocalDB2.defaultGoals[index]['difficulty']}')
+                            .then((a) {
+                          print("big goal added");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(title: 'Home', selectedIndex: 1,),
+                              ));
+                        }).catchError((a) {
+                          print("There is an error");
+                        });
                       },
 
                       title:
-                                Container(
-
-
-                                    child: Text('${LocalDB.defaultGoals[index]['name']}', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black), )),
-                      leading: ImageIcon(AssetImage('${LocalDB.defaultGoals[index]['image']}'), size: 40, color: Colors.black54),
-                      trailing: Text('${LocalDB.defaultGoals[index]['difficulty']}', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black,) ),
+                                Text('${LocalDB2.defaultGoals[index]['name']}', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
+                      leading: ImageIcon(AssetImage('${LocalDB2.defaultGoals[index]['image']}'), size: 40, color: Colors.black54,),
+                      trailing: Text('${LocalDB2.defaultGoals[index]['difficulty']}', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
                     ),
                   );
                 },

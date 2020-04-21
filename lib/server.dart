@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +25,8 @@ class Server {
     database.reference().child(user.uid + "/name").set(name);
     database.reference().child(user.uid + "/points").set(0);
     database.reference().child(user.uid + "/rank").set("Bronze IV");
+    database.reference().child(user.uid + "/rankColor").set(1);
+    database.reference().child(user.uid + "/rankBadge").set(1);
     database.reference().child(user.uid + "/streak").set(0);
     return user.uid;
   }
@@ -50,7 +53,7 @@ class Server {
   }
 
   Future<void> addSmallGoal(
-      String title, String difficulty, String frequency, String time) async {
+      String title, String difficulty, String frequency, String time, int hour, int minute) async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     var id = new DateTime.now().millisecondsSinceEpoch.toString();
     await database
@@ -64,6 +67,8 @@ class Server {
       "id": id,
       "streak": 0,
       "lastCompletionTime": 0,
+      "hour": hour,
+      'minute': minute,
     });
   }
 
@@ -213,91 +218,137 @@ class Server {
     FirebaseUser user = await _firebaseAuth.currentUser();
     DataSnapshot ds = await database.reference().child(user.uid + "/" + "points").once();
     var rank;
+    var color;
+    var badge;
     var point = ds.value;
     if (point >= 4500) {
       rank = "Master";
+      color = 6;
+      badge = 4;
       }
     else if (point >= 4000)
       {
         rank = "Diamond I";
+        color = 5;
+        badge = 4;
       }
     else if (point >= 3700)
     {
       rank = "Diamond II";
+      color = 5;
+      badge = 3;
     }
     else if (point >= 3400)
     {
       rank = "Diamond III";
+      color = 5;
+      badge = 2;
     }
     else if (point >= 3100)
     {
       rank = "Diamond IV";
+      color = 5;
+      badge = 1;
     }
     else if (point >= 2800)
     {
       rank = "Platinum I";
+      color = 4;
+      badge = 4;
     }
     else if (point >= 2550)
     {
       rank = "Platinum II";
+      color = 4;
+      badge = 3;
     }
     else if (point >= 2300)
     {
       rank = "Platinum III";
+      color = 4;
+      badge = 2;
     }
     else if (point >= 2050)
     {
       rank = "Platinum IV";
+      color = 4;
+      badge = 1;
     }
     else if (point >= 1800)
     {
       rank = "Gold I";
+      color = 3;
+      badge = 4;
     }
     else if (point >= 1600)
     {
       rank = "Gold II";
+      color = 3;
+      badge = 3;
     }
     else if (point >= 1400)
     {
       rank = "Gold III";
+      color = 3;
+      badge = 2;
     }
     else if (point >= 1200)
     {
       rank = "Gold IV";
+      color = 3;
+      badge = 1;
     }
     else if (point >= 950)
     {
       rank = "Silver I";
+      color = 2;
+      badge = 4;
     }
     else if (point >= 800)
     {
       rank = "Silver II";
+      color = 2;
+      badge = 3;
     }
     else if (point >= 650)
     {
       rank = "Silver III";
+      color = 2;
+      badge = 2;
     }
     else if (point >= 500)
     {
       rank = "Silver IV";
+      color = 2;
+      badge = 1;
     }
     else if (point >= 300)
     {
       rank = "Bronze I";
+      color = 1;
+      badge = 4;
     }
     else if (point >= 200)
     {
       rank = "Bronze II";
+      color = 1;
+      badge = 3;
     }
     else if (point >= 100)
     {
       rank = "Bronze III";
+      color = 1;
+      badge = 2;
     }
     else if (point >= 0)
     {
       rank = "Bronze IV";
+      color = 1;
+      badge = 1;
     }
     await database.reference().child(user.uid + "/rank").set(rank);
+    await database.reference().child(user.uid + "/rankColor").set(color);
+    await database.reference().child(user.uid + "/rankBadge").set(badge);
   }
   Future<dynamic> getRank() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
@@ -319,6 +370,15 @@ class Server {
         .child(user.uid + "/" + "streak")
         .once();
     return ds;
+  }
+  Future<void> updateCompletion(String id) async{
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    DataSnapshot ds = await database.reference()
+        .child(user.uid + "/" + "sm" + "/" + id)
+        .once();
+    var lastTime = new DateTime.fromMillisecondsSinceEpoch(
+        ds['lastCompletionTime']);
+
   }
   Future<void> updateStreak() async {
     FirebaseUser user = await _firebaseAuth.currentUser();

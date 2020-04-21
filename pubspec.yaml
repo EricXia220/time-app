@@ -58,6 +58,49 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/camera.png
+    - assets/background1.jpg
+    - assets/background2.jpg
+    - assets/background3.jpg
+    - assets/background4.jpg
+    - assets/background5.jpg
+    - assets/study.png
+    - assets/workout.png
+    - assets/drinkwater.png
+    - assets/bed.png
+    - assets/meditate.png
+    - assets/lightbulb.png
+    - assets/journal.png
+    - assets/helpstranger.png
+    - assets/wakeup.png
+    - assets/read.png
+    - assets/basketball.png
+    - assets/soccer.png
+    - assets/swimming.png
+    - assets/volleyball.png
+    - assets/baseball.png
+    - assets/practice.png
+    - assets/piano.png
+    - assets/violin.png
+    - assets/music.png
+    - assets/travel.png
+    - assets/job.png
+    - assets/internship.png
+    - assets/exerciseregularly.png
+    - assets/loseweight.png
+    - assets/learnnewskills.png
+    - assets/eathealthy.png
+    - assets/passexam.png
+    - assets/newbook.png
+    - assets/savemoney.png
+    - assets/cleanroom.png
+    - assets/finishproject.png
+    - assets/rankbadge1.png
+    - assets/rankbadge2.png
+    - assets/rankbadge3.png
+    - assets/rankbadge4.png
+    - assets/background7.jpg
+
+
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
