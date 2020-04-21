@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>491143591771-b3i5c9a6lcchlhb23s5kh9pipg909nd8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.491143591771-b3i5c9a6lcchlhb23s5kh9pipg909nd8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDWU3T7j2o0zsMtKb09VQ21WWiBIg_jlFM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>491143591771</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.timem.timeApp</string>
+	<key>PROJECT_ID</key>
+	<string>timeprogram-80a25</string>
+	<key>STORAGE_BUCKET</key>
+	<string>timeprogram-80a25.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:491143591771:ios:dfeb8fff803c4d14104c7e</string>
+	<key>DATABASE_URL</key>
+	<string>https://timeprogram-80a25.firebaseio.com</string>
+</dict>
+</plist>

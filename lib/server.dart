@@ -376,8 +376,7 @@ class Server {
     DataSnapshot ds = await database.reference()
         .child(user.uid + "/" + "sm" + "/" + id)
         .once();
-    var lastTime = new DateTime.fromMillisecondsSinceEpoch(
-        ds['lastCompletionTime']);
+
 
   }
   Future<void> updateStreak() async {
