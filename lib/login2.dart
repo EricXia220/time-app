@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'customizeBg.dart';
 import 'home.dart';
 import 'signUp.dart';
 import 'server.dart';

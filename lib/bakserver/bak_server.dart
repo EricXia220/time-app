@@ -10,20 +10,21 @@ class ServerBak {
   FirebaseDatabase database = new FirebaseDatabase();
 
   Future<String> signIn(String email, String password) async {
-    FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+    FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password)).user;
     return user.uid;
   }
 
   Future<String> signUpWithProfile(String email, String password, String name,
       String level) async {
-    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password)).user;
     database.reference().child("/users/" + user.uid + "/name").set(name);
     database.reference().child("/users/" + user.uid + "/level").set(level);
     return user.uid;
   }
 
+  // ignore: slash_for_doc_comments
   /**
    * This is a sample of the usage.
    *
@@ -362,8 +363,8 @@ class ServerBak {
   }
 
   Future<String> signUp(String email, String password) async {
-    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password)).user;
     return user.uid;
   }
 

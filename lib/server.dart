@@ -10,8 +10,11 @@ class Server {
   FirebaseDatabase database = new FirebaseDatabase();
 
   Future<String> signIn(String email, String password) async {
-    FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+    final FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    )).user;
+
     return user.uid;
   }
 
@@ -20,8 +23,8 @@ class Server {
     String password,
     String name,
   ) async {
-    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password)).user;
     database.reference().child(user.uid + "/name").set(name);
     database.reference().child(user.uid + "/points").set(0);
     database.reference().child(user.uid + "/rank").set("Bronze IV");
@@ -33,8 +36,8 @@ class Server {
 
   Future<String> signUp(String email, String password) async {
     print("called " + email);
-    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password)).user;
     return user.uid;
   }
 
